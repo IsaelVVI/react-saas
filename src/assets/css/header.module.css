@@ -1,0 +1,44 @@
+
+header {
+    /* width: 100%; */
+    padding: 0.12rem 0.8rem;
+    border-bottom: var(--secondary-color-50) solid 1px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    gap: 0rem 1rem;
+    font-size: medium;
+    color: var(--text-zinc);
+}
+
+.button_list {
+    min-width: 6rem;
+    background-color: transparent;
+    border: transparent;
+    color: var(--text-zinc);
+    outline: none;
+    padding: 0.2rem 0.7rem;
+}
+
+.button_list:hover {
+    transition: all;
+    transition-duration: 100ms;
+    background-color: var(--secondary-color-50);
+    border-radius: 0.45rem;
+    border: rgb(255, 255, 255, 0.1) solid 1px;
+}
+
+.link {
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.modal {
+    background-color: var(--secondary-color);
+}
