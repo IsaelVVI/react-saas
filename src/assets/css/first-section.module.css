@@ -63,6 +63,13 @@ p {
     font-weight: 500;
 }
 
+.button:disabled {
+    opacity: 0.5;
+    display: flex;
+    align-items: center;
+    gap: 0rem 0.2rem;
+}
+
 
 .image {
     position: relative;
@@ -119,7 +126,7 @@ p {
 }
 
 .card_content {
-    min-height: 12rem;
+    height: 17rem;
     padding: 0.4rem;
     border-radius: 0.45rem;
     font-size: small;
@@ -128,6 +135,10 @@ p {
     align-items: center;
     justify-content: center;
     background-color: var(--secondary-color-50);
+}
+
+.rec_plan_card {
+    padding-top: 2.6rem;
 }
 
 .card_content h6 {
@@ -172,6 +183,7 @@ p {
 
 .comment_content img {
     border-radius: 100%;
+    object-fit: cover;
     height: 50px;
     width: 50px;
 }
@@ -187,3 +199,14 @@ p {
     border-radius: 0.4rem;
     padding: 0.5rem 2rem;
 }
+
+
+@media (max-width: 600px) {
+    .card_content {
+        height: auto;
+    }
+
+    .rec_plan_card {
+        padding-top: 0rem;
+    }
+  }

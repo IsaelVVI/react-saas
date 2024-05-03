@@ -5,6 +5,7 @@ import axios from 'axios'
 export const Main = () => {
     const [image, setImage] = useState("./images/response.png")
     const [hasimage, setHasImage] = useState(false)
+    const [hasloading, setLoading] = useState(false)
 
     const [tempImage, setTempImage] = useState<File>()
 
@@ -21,13 +22,11 @@ export const Main = () => {
 
         setTempImage(event.target.files[0])
 
-
         setHasImage(true)
     }
     
 
     const removeBgImage = async () => {
-    
         const form = new FormData()
 
         if(!tempImage){
@@ -58,11 +57,14 @@ export const Main = () => {
         form.append("file", dataTransfer.files[0])
 
        try {
+        setLoading(true)
         const {data} = await axios.post<{message: string, file: string}>("https://goremove.warezap.com/api/v1/removebg", form)
         
         console.log(data.file);
         
         setImage(`data:image/png;base64,${data.file}`)
+
+        setLoading(false)
 
        } catch (error) {
         console.log("error:", error);
@@ -109,7 +111,10 @@ export const Main = () => {
                         <label htmlFor='floatingInput' className={style.button}>
                             Selecionar Imagem
                         </label> :
-                        <button onClick={removeBgImage} className={style.button}>
+                        <button disabled={hasloading} onClick={removeBgImage} className={style.button}>
+                            {
+                                hasloading && <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z"><animateTransform attributeName="transform" dur="0.75s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></svg>
+                            }
                             Remover Fundo
                         </button>
                     }
@@ -147,8 +152,8 @@ export const Main = () => {
                 </div>
                 <div className={`row ${style.plans}`}>
                     <div className={`col-12 col-lg-4 ${style.plan_card}`}>
-                        <div className={style.card_content}>
-                            <div>
+                        <div className={`py-4 ${style.card_content}`}>
+                            <div className=''>
                                 <h6>Plano</h6>
                                 <h2>Básico+</h2>
                             </div>
@@ -163,8 +168,8 @@ export const Main = () => {
                         </div>
                     </div>
                     <div className={`col-12 col-lg-4 ${style.plan_card}`}>
-                        <div className={style.card_content}>
-                            <div>
+                        <div  className={`py-4 ${style.card_content}`}>
+                            <div className={style.rec_plan_card}>
                                 <h6>Plano</h6>
                                 <h2>Comfort+</h2>
                             </div>
@@ -176,7 +181,7 @@ export const Main = () => {
                             <button>
                                 Criar conta
                             </button>
-                            <div className='mt-4'>
+                            <div className='mt-1'>
                                 <p>
                                     Plano mais escolhido
                                 </p>
@@ -184,7 +189,7 @@ export const Main = () => {
                         </div>
                     </div>
                     <div className={`col-12 col-lg-4 ${style.plan_card}`}>
-                        <div className={style.card_content}>
+                        <div  className={`py-4 ${style.card_content}`}>
                             <div>
                                 <h6>Plano</h6>
                                 <h2>Premium+</h2>
